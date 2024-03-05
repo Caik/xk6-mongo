@@ -66,14 +66,19 @@ func (c *Client) Find(database string, collection string, filter interface{}) []
 	db := c.client.Database(database)
 	col := db.Collection(collection)
 	log.Print(filter_is, filter)
+	// cur, err := col.Find(context.TODO(), filter)
 	cur, err := col.Find(context.TODO(), filter)
+
 	if err != nil {
 		log.Fatal(err)
 	}
 	var results []bson.M
-	if err = cur.All(context.TODO(), &results); err != nil {
-		panic(err)
-	}
+
+	// commeting this out for testing purposes
+	// if err = cur.All(context.TODO(), &results); err != nil {
+	// 	panic(err)
+	// }
+
 	return results
 }
 
